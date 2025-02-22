@@ -1,12 +1,7 @@
 <?php
     function db() {
-        $connexion = null;
-        $host = 'localhost';
-        $db_name = 'ecommerce';
-        $username = 'root';
-        $password = '';
         try{
-            $connexion = new PDO("mysql:host=" . $host . ";dbname=" . $db_name, $username, $password);
+            $connexion = new PDO("sqlite: dump.db");
             $connexion->exec("set names utf8");
         }catch(PDOException $exception){
             echo "Connection error: " . $exception->getMessage();
