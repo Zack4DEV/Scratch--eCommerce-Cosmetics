@@ -4,7 +4,7 @@
         <div class="row">
 
             <div class="col-lg-4">
-                <img class="card-img-top" src="./uploads/<?= $product['filename']; ?>">
+                <img class="card-img-top" src="../uploads/<?= $product['filename']; ?>">
             </div>
 
             <div class="col-lg-8">

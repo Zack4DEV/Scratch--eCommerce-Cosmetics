@@ -1,0 +1,81 @@
+PRAGMA foreign_keys = ON;
+PRAGMA journal_mode = WAL;
+PRAGMA synchronous = NORMAL;
+
+-- Category table
+CREATE TABLE `category` (
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+    `name` TEXT NOT NULL UNIQUE,
+    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX idx_category_name ON category(name);
+
+-- Product table
+CREATE TABLE `product` (
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+    `name` TEXT NOT NULL,
+    `description` TEXT NOT NULL,
+    `price` DECIMAL(10,2) NOT NULL CHECK (price >= 0),
+    `category_id` INTEGER NOT NULL,
+    `filename` TEXT NOT NULL,
+    `stock_quantity` INTEGER NOT NULL DEFAULT 0 CHECK (stock_quantity >= 0),
+    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`category_id`) REFERENCES category(`id`) ON DELETE RESTRICT
+);
+CREATE INDEX idx_product_category ON product(category_id);
+CREATE INDEX idx_product_name ON product(name);
+CREATE INDEX idx_product_price ON product(price);
+
+-- User table
+CREATE TABLE `user` (
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+    `email` TEXT NOT NULL UNIQUE COLLATE NOCASE,
+    `password` TEXT NOT NULL,
+    `admin` BOOLEAN NOT NULL DEFAULT 0,
+    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `last_login` DATETIME,
+    `active` BOOLEAN NOT NULL DEFAULT 1
+);
+CREATE INDEX idx_user_email ON user(email);
+
+-- User order table
+CREATE TABLE `user_order` (
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+    `status` TEXT NOT NULL CHECK (status IN ('pending', 'processing', 'shipped', 'delivered', 'cancelled')),
+    `user_id` INTEGER NOT NULL,
+    `total_amount` DECIMAL(10,2) NOT NULL DEFAULT 0,
+    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`user_id`) REFERENCES user(`id`) ON DELETE RESTRICT
+);
+CREATE INDEX idx_order_user ON user_order(user_id);
+CREATE INDEX idx_order_status ON user_order(status);
+CREATE INDEX idx_order_created_at ON user_order(created_at);
+
+-- Order product table
+CREATE TABLE `order_product` (
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+    `product_id` INTEGER NOT NULL,
+    `quantity` INTEGER NOT NULL CHECK (quantity > 0),
+    `user_order_id` INTEGER NOT NULL,
+    `price_at_time` DECIMAL(10,2) NOT NULL,
+    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`product_id`) REFERENCES product(`id`) ON DELETE RESTRICT,
+    FOREIGN KEY (`user_order_id`) REFERENCES user_order(`id`) ON DELETE RESTRICT
+);
+CREATE INDEX idx_orderproduct_order ON order_product(user_order_id);
+CREATE INDEX idx_orderproduct_product ON order_product(product_id);
+
+-- Trigger to update updated_at timestamp
+CREATE TRIGGER update_product_timestamp 
+AFTER UPDATE ON product
+BEGIN
+    UPDATE product SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;
+END;
+
+CREATE TRIGGER update_order_timestamp 
+AFTER UPDATE ON user_order
+BEGIN
+    UPDATE user_order SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;
+END;

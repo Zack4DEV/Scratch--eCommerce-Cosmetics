@@ -2,7 +2,7 @@
     include_once "config.php";
 
     function upload_file($file) {
-        $uploadDir = __DIR__ . '/uploads/';
+        $uploadDir = 'uploads/';
         $uploadFilename = $uploadDir . basename($file['file']['name']);
         
         move_uploaded_file($_FILES['file']['tmp_name'], $uploadFilename);
@@ -11,8 +11,8 @@
     }
     function get_products_by_category($id) {
         $connexion = db();
-        $query = "SELECT * FROM product WHERE category=" . $id;
-	    $stmt = $connexion->query($query);
+        $query = "SELECT * FROM product WHERE category= . $id .";
+	    $stmt = $connexion->query($query)->fetchAll(PDO::FETCH_ASSOC);
 	    $stmt->execute();		
         
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -21,8 +21,8 @@
     }
     function get_products_by_id($id) {
         $connexion = db();
-        $query = "SELECT * FROM product WHERE id=" . $id;
-	    $stmt = $connexion->query($query);
+        $query = "SELECT * FROM product WHERE id= . $id .";
+	    $stmt = $connexion->query($query)->fetchAll(PDO::FETCH_ASSOC);
 	    $stmt->execute();		
         
         $products = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -32,7 +32,7 @@
     function get_products() {
         $connexion = db();
         $query = "SELECT * FROM product";
-	    $stmt = $connexion->query($query);
+	    $stmt = $connexion->query($query)->fetchAll(PDO::FETCH_ASSOC);
 	    $stmt->execute();		
         
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -74,14 +74,14 @@
     }
     function remove_category($id) {
         $connexion = db();
-        $query = "DELETE FROM category WHERE id=" . $id;
+        $query = "DELETE FROM category WHERE id= . $id .";
 
         $stmt = $connexion->query($query);
         $stmt->execute();
     }
     function remove_product($id) {
         $connexion = db();
-        $query = "DELETE FROM product WHERE id=" . $id;
+        $query = "DELETE FROM product WHERE id= . $id .";
 
         $stmt = $connexion->query($query);
         $stmt->execute();
@@ -89,7 +89,7 @@
     function get_users($isAdmin = 0) {
         $connexion = db();
         $query = "SELECT * FROM user WHERE admin=" . $isAdmin;
-	    $stmt = $connexion->query($query);
+	    $stmt = $connexion->query($query)->fetchAll(PDO::FETCH_ASSOC);
 	    $stmt->execute();		
         
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -110,15 +110,15 @@
     }
     function remove_user($id) {
         $connexion = db();
-        $query = "DELETE FROM user WHERE id=" . $id;
+        $query = "DELETE FROM user WHERE id= . $id .";
 
-        $stmt = $connexion->query($query);
+        $stmt = $connexion->query($query)->fetchAll(PDO::FETCH_ASSOC);
         $stmt->execute();
     }
     function find_user_by_email_and_password($data){
         $connexion = db();
         $query = "SELECT * FROM user WHERE email='" . $data['email'] ."'";
-	    $stmt = $connexion->query($query);
+	    $stmt = $connexion->query($query)->fetchAll(PDO::FETCH_ASSOC);
 	    $stmt->execute();		
         
         $user = $stmt->fetch(PDO::FETCH_ASSOC);

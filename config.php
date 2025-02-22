@@ -1,12 +1,11 @@
 <?php
-    function db() {
-        try{
-            $connexion = new PDO("sqlite: dump.db");
-            $connexion->exec("set names utf8");
-        }catch(PDOException $exception){
-            echo "Connection error: " . $exception->getMessage();
-        }
-
+function db() {
+    try {
+        $connexion = new PDO("sqlite: database/session.db");
+        $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $connexion;
+    } catch (PDOException $exception) {
+        die("Connection error: " . $exception->getMessage());
     }
+}
 ?>

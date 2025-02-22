@@ -20,7 +20,7 @@
                                 <tr>
                                     <th scope="row"><?= $p['quantity']; ?></th>
                                     <td><?= $p['name']; ?></td>
-                                    <td><a href="./index.php/panier/del?id=<?= $key; ?>" class="btn btn-danger text-white">Supprimer</a></td>
+                                    <td><a href="/index.php/panier/del?id=<?= $key; ?>" class="btn btn-danger text-white">Supprimer</a></td>
                                 </tr>
                                 <?php $total = $total + $p['quantity'] * 10; ?>
                             <?php } ?>

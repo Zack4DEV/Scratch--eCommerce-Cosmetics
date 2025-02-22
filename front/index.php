@@ -14,7 +14,7 @@
             <?php foreach ($products as $p) { ?>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" src="./uploads/<?= $p['filename']; ?>">
+                        <img class="card-img-top" src="../uploads/<?= $p['filename']; ?>">
                         <div class="card-body">
                             <p class="card-text"><?= $p['name']; ?></p>
                             <div class="d-flex justify-content-between align-items-center">

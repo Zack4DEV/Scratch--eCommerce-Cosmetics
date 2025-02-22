@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="./assets/img/favicon.ico">
+    <link rel="icon" href="../assets/img/favicon.ico">
 
     <title>Produits de beauté</title>
 
-    <base href="http://localhost:8000/">
+    <base href="/">
 
     <!-- Bootstrap core CSS -->
-    <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="./assets/css/custom.css" rel="stylesheet">
+    <link href="../assets/css/custom.css" rel="stylesheet">
 
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 </head>
