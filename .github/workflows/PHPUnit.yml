@@ -1,0 +1,62 @@
+
+name: PHPUnit
+on:
+  push:
+    branches: ['master']
+  pull_request:
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_DATABASE: db
+          MYSQL_USER: root
+          MYSQL_PASSWORD: ''
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    strategy:
+       matrix:
+        os: [ubuntu-latest]
+        php: [8.2]
+        phpunit: [11.0.1]
+        include:
+           - testbench: 9.0.3
+        dependencies:
+          - "locked"
+          - "lowest"
+          - "highest"
+        experimental:
+          - false
+
+    name: ${{ matrix.os }} - ${{ matrix.php }} - ${{ matrix.phpunit }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: nanasess/setup-php@v4.0.2
+        with:
+          php-version: 8.2
+          coverage: none
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, mysql, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, redis
+
+      - name: Install composer dependencies
+        uses: ramsey/composer-install@v2
+        with:
+          composer-options: "--prefer-dist --no-interaction"
+
+      - name: Unit Test
+        run: |
+          "'/vendor/bin/phpunit' --testsuite Unit | php"
