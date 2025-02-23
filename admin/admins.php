@@ -14,7 +14,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($users as $u) { ?>
+                    <?php foreach ($user as $u) { ?>
                         <tr>
                             <th scope="row"><?= $u['id'] ?></th>
                             <td><?= $u['email'] ?></td>

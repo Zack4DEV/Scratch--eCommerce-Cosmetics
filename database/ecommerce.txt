@@ -1,6 +1,8 @@
 PRAGMA foreign_keys = ON;
 PRAGMA journal_mode = WAL;
 PRAGMA synchronous = NORMAL;
+PRAGMA optimize;
+PRAGMA cache_size = -16384;
 
 -- Category table
 CREATE TABLE `category` (

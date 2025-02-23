@@ -2,45 +2,45 @@
     include_once "config.php";
 
     function upload_file($file) {
-        $uploadDir = 'uploads/';
+        $uploadDir = __DIR__ . '/uploads/';
         $uploadFilename = $uploadDir . basename($file['file']['name']);
-        
+
         move_uploaded_file($_FILES['file']['tmp_name'], $uploadFilename);
 
         return basename($file['file']['name']);
     }
     function get_products_by_category($id) {
-        $connexion = db();
-        $query = "SELECT * FROM product WHERE category= . $id .";
-	    $stmt = $connexion->query($query)->fetchAll(PDO::FETCH_ASSOC);
-	    $stmt->execute();		
-        
+        $connexion = get_db_connection();
+        $query = "SELECT * FROM product WHERE category=" . $id;
+        $stmt = $connexion->query($query);
+        $stmt->execute();		
+
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-	    return $products; 
+        return $products; 
     }
     function get_products_by_id($id) {
-        $connexion = db();
-        $query = "SELECT * FROM product WHERE id= . $id .";
-	    $stmt = $connexion->query($query)->fetchAll(PDO::FETCH_ASSOC);
-	    $stmt->execute();		
-        
+        $connexion = get_db_connection();
+        $query = "SELECT * FROM product WHERE id=" . $id;
+        $stmt = $connexion->query($query);
+        $stmt->execute();		
+
         $products = $stmt->fetch(PDO::FETCH_ASSOC);
 
-	    return $products; 
+        return $products; 
     }
     function get_products() {
-        $connexion = db();
+        $connexion = get_db_connection();
         $query = "SELECT * FROM product";
-	    $stmt = $connexion->query($query)->fetchAll(PDO::FETCH_ASSOC);
-	    $stmt->execute();		
-        
+        $stmt = $connexion->query($query);
+        $stmt->execute();		
+
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-	    return $products; 
+        return $products; 
     }
     function set_product($data, $files) {
-        $connexion = db();
+        $connexion = get_db_connection();
         $query = "INSERT INTO product SET name=:name, description=:description, price=:price, category=:category, filename=:filename";
 
         $stmt = $connexion->prepare($query);
@@ -51,21 +51,21 @@
 
         $filename = upload_file($files);
         $stmt->bindParam(":filename", $filename);
-        
+
         $stmt->execute();
     }
     function get_categories() {
-        $connexion = db();
+        $connexion = get_db_connection();
         $query = "SELECT * FROM category";
-	    $stmt = $connexion->query($query);
-	    $stmt->execute();		
-        
+        $stmt = $connexion->query($query);
+        $stmt->execute();		
+
         $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-	    return $categories; 
+        return $categories; 
     }
     function set_category($data) {
-        $connexion = db();
+        $connexion = get_db_connection();
         $query = "INSERT INTO category SET name=:name";
 
         $stmt = $connexion->prepare($query);
@@ -73,54 +73,55 @@
         $stmt->execute();
     }
     function remove_category($id) {
-        $connexion = db();
-        $query = "DELETE FROM category WHERE id= . $id .";
+        $connexion = get_db_connection();
+        $query = "DELETE FROM category WHERE id=" . $id;
 
         $stmt = $connexion->query($query);
         $stmt->execute();
     }
     function remove_product($id) {
-        $connexion = db();
-        $query = "DELETE FROM product WHERE id= . $id .";
+        $connexion = get_db_connection();
+        $query = "DELETE FROM product WHERE id=" . $id;
 
         $stmt = $connexion->query($query);
         $stmt->execute();
     }
     function get_users($isAdmin = 0) {
-        $connexion = db();
+        $connexion = get_db_connection();
         $query = "SELECT * FROM user WHERE admin=" . $isAdmin;
-	    $stmt = $connexion->query($query)->fetchAll(PDO::FETCH_ASSOC);
-	    $stmt->execute();		
-        
+        $stmt = $connexion->query($query);
+        $stmt->execute();		
+
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	    return $users; 
+        return $users; 
     }
     function set_user($data) {
-        $connexion = db();
-        $query = "INSERT INTO user SET email=:email, password=:password, admin=:admin";
+    $connexion = get_db_connection();
+    $query = "INSERT INTO user VALUES(email,password,admin)";
 
-        $stmt = $connexion->prepare($query);
-        $email = $data['email'];
-        $password = md5($data['password']);
-        $admin = (isset($data['admin'])) ? 1 : 0;
-        $stmt->bindParam(":email", $email);
-        $stmt->bindParam(":password", $password);
-        $stmt->bindParam(":admin", $admin);
-        $stmt->execute();
-    }
+    $stmt = $connexion->prepare($query);
+    $email = $data['email'];
+    $password = md5($data['password']);
+    $admin = (isset($data['admin'])) ? 1 : 0;
+    $stmt->bindParam(":email", $email);
+    $stmt->bindParam(":password", $password);
+    $stmt->bindParam(":admin", $admin);
+    $stmt->execute();
+}
+
     function remove_user($id) {
-        $connexion = db();
-        $query = "DELETE FROM user WHERE id= . $id .";
+        $connexion = get_db_connection();
+        $query = "DELETE FROM user WHERE id=" . $id;
 
-        $stmt = $connexion->query($query)->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $connexion->query($query);
         $stmt->execute();
     }
     function find_user_by_email_and_password($data){
-        $connexion = db();
+        $connexion = get_db_connection();
         $query = "SELECT * FROM user WHERE email='" . $data['email'] ."'";
-	    $stmt = $connexion->query($query)->fetchAll(PDO::FETCH_ASSOC);
-	    $stmt->execute();		
-        
+        $stmt = $connexion->query($query);
+        $stmt->execute();		
+
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!empty($user) && ($user['password'] == md5($data['password']))) {

@@ -1,7 +1,7 @@
 <?php
 function db() {
     try {
-        $connexion = new PDO("sqlite: database/session.db");
+        $connexion = new PDO("sqlite:" .dirname(__FILE__)."/database/ecommerce.db");
         $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $connexion;
     } catch (PDOException $exception) {
