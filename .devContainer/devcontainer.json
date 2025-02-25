@@ -1,0 +1,25 @@
+{
+  "name": "PHP",
+  "image": "mcr.microsoft.com/devcontainers/php:0-8.1",
+  "features": {
+    "ghcr.io/devcontainers/features/php:1": {
+      "version": "8.2"
+    }
+  },
+  "postCreateCommand": "composer install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "xdebug.php-debug"
+      ]
+    }
+  },
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": {
+      "label": "Application",
+      "onAutoForward": "notify"
+    }
+  }
+}

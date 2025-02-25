@@ -1,6 +1,6 @@
 ## Store eCommerce
 
-![Store eCommerce](./.Products/.Categories/Argan/Argan-img-01.jpeg)
+![Store eCommerce](./uploads/Argan-img-01.jpeg)
 
 ### About:
 A Store eCommerce Web App. 
