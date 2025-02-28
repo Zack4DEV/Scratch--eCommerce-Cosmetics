@@ -9,11 +9,10 @@
    ];
 
 	deps = [
-		  pkgs.php
+		 pkgs.php82
 		 pkgs.sqlite
 		 pkgs.php80Packages.composer
 		 pkgs.nodejs
-		 pkgs.nodePackages.nodemon
 	];
 	
 	 idx = {
