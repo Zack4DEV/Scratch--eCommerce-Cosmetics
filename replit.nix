@@ -1,25 +1,26 @@
 { pkgs }: {
 	 channel = "stable-24.05";
 
-	  home.packages = [
-		pkgs.sqlite
-		pkgs.php80Packages.composer
-		pkgs.php82
-		pkgs.nodejs
-		pkgs.nodePackages.nodemon
-		pkgs.gh
-		pkgs.sudo
 
-	];
-  deps = [
-     pkgs.php
+   home.packages = [
+			 pkgs.nano
+			 pkgs.gh
+			 pkgs.sudo
    ];
+
+	deps = [
+		  pkgs.php
+		 pkgs.sqlite
+		 pkgs.php80Packages.composer
+		 pkgs.nodejs
+		 pkgs.nodePackages.nodemon
+	];
 	
 	 idx = {
 		extensions = [];
 		 previews = {
 			  web = {
-			    command = ["nix-shell --packages pkgs.php82 | cd /nix/store/6abnc1cqyn1y6f7nh6v76aa6204mc79z-php-with-extensions-8.2.20 && php -S 0.0.0.0:8000 -t ."];
+			    command = ["php -S 0.0.0.0:8000 -t ~/Workspace"];
 			    manager = "web";
 			    env = {
 			      PORT = "$PORT";
@@ -31,7 +32,7 @@
 			};
 			onStart = {
 				serve = ''
-					"nix-shell --packages pkgs.php82 | cd /nix/store/6abnc1cqyn1y6f7nh6v76aa6204mc79z-php-with-extensions-8.2.20 && php -S 0.0.0.0:8000 -t ."
+					php -S 0.0.0.0:8000 -t ~/Workspace
 				'';
 				default.openFiles = [ "index.php" ];
 			};
