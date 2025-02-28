@@ -1,4 +1,4 @@
-run = "php -S 0.0.0.0:8000 -t ~/Workspace"
+run = "cd /nix/store/6abnc1cqyn1y6f7nh6v76aa6204mc79z-php-with-extensions-8.2.20 && php -S 0.0.0.0:8000 -t /home/runner/workspace"
 
 entrypoint = "index.php"
 
@@ -6,8 +6,9 @@ entrypoint = "index.php"
 channel = "stable-24_05"
 
 [deployment]
-run = ["php -S 0.0.0.0:8000 -t ~/Workspace"]
+run = ["cd /nix/store/6abnc1cqyn1y6f7nh6v76aa6204mc79z-php-with-extensions-8.2.20 && php -S 0.0.0.0:8000 -t /home/runner/workspace"]
 deploymentTarget = "cloudrun"
 
 [[ports]]
 localPort = 8000
+externalPort = 80
