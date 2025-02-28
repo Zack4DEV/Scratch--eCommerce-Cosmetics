@@ -19,7 +19,7 @@
 		extensions = [];
 		 previews = {
 			  web = {
-			    command = ["nix-shell --packages pkgs.php82 | /nix/store/6abnc1cqyn1y6f7nh6v76aa6204mc79z-php-with-extensions-8.2.20 -S 0.0.0.0:8000 -t ."];
+			    command = ["nix-shell --packages pkgs.php82 | /nix/store/6abnc1cqyn1y6f7nh6v76aa6204mc79z-php-with-extensions-8.2.20/php -S 0.0.0.0:8000 -t ."];
 			    manager = "web";
 			    env = {
 			      PORT = "$PORT";
@@ -31,7 +31,7 @@
 			};
 			onStart = {
 				serve = ''
-					"nix-shell --packages pkgs.php82 | /nix/store/6abnc1cqyn1y6f7nh6v76aa6204mc79z-php-with-extensions-8.2.20 -S 0.0.0.0:8000 -t ."
+					"nix-shell --packages pkgs.php82 | /nix/store/6abnc1cqyn1y6f7nh6v76aa6204mc79z-php-with-extensions-8.2.20/php -S 0.0.0.0:8000 -t ."
 				'';
 				default.openFiles = [ "index.php" ];
 			};
