@@ -1,4 +1,4 @@
-run = "nix-shell --packages pkgs.php82 | /nix/store/6abnc1cqyn1y6f7nh6v76aa6204mc79z-php-with-extensions-8.2.20/php -S 0.0.0.0:8000 -t ."
+run = "nix-shell --packages pkgs.php82 | cd /nix/store/6abnc1cqyn1y6f7nh6v76aa6204mc79z-php-with-extensions-8.2.20 && php -S 0.0.0.0:8000 -t ."
 
 entrypoint = "index.php"
 
@@ -6,7 +6,7 @@ entrypoint = "index.php"
 channel = "stable-24_05"
 
 [deployment]
-run = ["nix-shell --packages pkgs.php82 | /nix/store/6abnc1cqyn1y6f7nh6v76aa6204mc79z-php-with-extensions-8.2.20/php -S 0.0.0.0:8000 -t ."]
+run = ["nix-shell --packages pkgs.php82 | cd /nix/store/6abnc1cqyn1y6f7nh6v76aa6204mc79z-php-with-extensions-8.2.20 && php -S 0.0.0.0:8000 -t ."]
 deploymentTarget = "cloudrun"
 
 [[ports]]
