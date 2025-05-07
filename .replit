@@ -1,0 +1,20 @@
+run = "npm run start-web-dev"
+modules = ["nodejs-20:v8-20230920-bd784b9"]
+
+[nix]
+channel = "unstable"
+
+[deployment]
+run = ["sh", "-c", "npm run start-web-dev"]
+deploymentTarget = "cloudrun"
+
+
+[auth]
+pageEnabled = false
+buttonEnabled = false
+
+[[ports]]
+localPort = 4040
+externalPort = 8081
+exposeLocalhost = true
+
