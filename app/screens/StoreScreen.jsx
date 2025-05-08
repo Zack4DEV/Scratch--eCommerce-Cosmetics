@@ -6,7 +6,7 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import AIProductRecommendations from '../components/Store/AIProductRecommendations';
+import AIProductRecommendations from '../components/store/AIProductRecommendations';
 import AIAssistant from '../components/AIAssistant';
 import ProductCard from '../components/store/ProductCard'
 import { MendableAI } from '../utils/mendableAI';

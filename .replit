@@ -18,7 +18,4 @@ localPort = 4040
 externalPort = 8081
 exposeLocalhost = true
 
-[[ports]]
-localPort = 8081
-externalPort = 80
 

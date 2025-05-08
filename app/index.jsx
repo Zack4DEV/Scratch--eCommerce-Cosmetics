@@ -1,9 +1,9 @@
 import { NavigationIndependentTree } from '@react-navigation/native';
 import { Tabs } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
-import Store from '../store';
-import Feedback from '../feedback';
-import AIAssistant from '../components/AIAssistant';
+import Store from './store';
+import Feedback from './feedback';
+import AIAssistant from './components/AIAssistant';
 
 
 
