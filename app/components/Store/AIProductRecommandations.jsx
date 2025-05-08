@@ -43,7 +43,7 @@ const AIProductRecommendations = ({ userPreferences }) => {
   if (loading) {
     return (
       <View style={styles.container}>
-        <Text>Loading AI Recommendations...</Text>
+        <Text>Loading AI Recommendations</Text>
       </View>
     );
   }
