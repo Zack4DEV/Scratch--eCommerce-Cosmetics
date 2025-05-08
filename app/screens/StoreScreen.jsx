@@ -49,7 +49,7 @@ const StoreScreen = () => {
         )}
 
         <View style={styles.recommendationsSection}>
-          <AIProductRecommendations userPreferences={userPreferences} />
+          <AIProductRecommendations/>
         </View>
 
         <View style={styles.featuredSection}>
