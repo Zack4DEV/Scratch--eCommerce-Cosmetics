@@ -8,14 +8,8 @@ channel = "unstable"
 run = ["sh", "-c", "npm run start --web"]
 deploymentTarget = "cloudrun"
 
-
 [auth]
 pageEnabled = false
 buttonEnabled = false
-
-[[ports]]
-localPort = 4040
-externalPort = 8081
-exposeLocalhost = true
 
 
