@@ -1,6 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as dotenv from "dotenv";
 
-const MENDABLE_API_KEY = 'YOUR_MENDABLE_API_KEY'; // Replace with actual key
+
+const MENDABLE_API_KEY = process.env.MENDABLE_API_KEY; 
 
 export class MendableAI {
   static async getProductRecommendations(userPreferences) {
