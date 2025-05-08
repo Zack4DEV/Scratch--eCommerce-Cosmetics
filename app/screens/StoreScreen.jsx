@@ -6,9 +6,9 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import AIProductRecommendations from '../components/store/AIProductRecommendations';
+import AIProductRecommendations from '../components/Store/AIProductRecommendations';
 import AIAssistant from '../components/AIAssistant';
-import ProductCard from '../components/store/ProductCard'
+import ProductCard from '../components/Store/ProductCard'
 import { MendableAI } from '../utils/mendableAI';
 
 const StoreScreen = () => {
