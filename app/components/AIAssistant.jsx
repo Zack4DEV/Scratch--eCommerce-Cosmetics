@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import { MendableAI } from '../utils/mendableAI';
+import { MendableAI } from '../../utils/mendableAI';
 
 const AIAssistant = () => {
   const [messages, setMessages] = useState([
