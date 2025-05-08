@@ -18,7 +18,7 @@
 		extensions = [];
 		 previews = {
 			  web = {
-			    command = ["npm run start-web-dev"];
+			    command = ["npm run start --web"];
 			    manager = "web";
 			    env = {
 			      PORT = "$PORT";
@@ -35,7 +35,7 @@
 			};
 			 onStart = {
 				# Example: start a background task to watch and re-build backend code
-				 watch-backend = "npm run start-web-dev";
+				 watch-backend = "npm run start --web";
 			};
 		};
 	};

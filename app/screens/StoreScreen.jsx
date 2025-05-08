@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import AIProductRecommendations from '../components/Store/AIProductRecommendations';
 import AIAssistant from '../components/AIAssistant';
+import ProductCard from '../components/store/ProductCard'
 import { MendableAI } from '../utils/mendableAI';
 
 const StoreScreen = () => {
@@ -53,7 +54,7 @@ const StoreScreen = () => {
 
         <View style={styles.featuredSection}>
           <Text style={styles.sectionTitle}>Featured Products</Text>
-          {/* Add your featured products here */}
+          <ProductCard />
         </View>
       </ScrollView>
     </View>

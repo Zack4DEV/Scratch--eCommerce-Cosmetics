@@ -1,5 +1,11 @@
+import { NavigationIndependentTree } from '@react-navigation/native';
 import { Tabs } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
+import Store from '../store';
+import Feedback from '../feedback';
+import AIAssistant from '../components/AIAssistant';
+
+
 
 export default function AppLayout() {
   return (
@@ -29,6 +35,11 @@ export default function AppLayout() {
           ),
         }}
       />
+      {() => (
+        <NavigationIndependentTree>
+          <Store />
+        </NavigationIndependentTree>
+      )}
       <Tabs.Screen
         name="ai-guide"
         options={{
@@ -38,6 +49,11 @@ export default function AppLayout() {
           ),
         }}
       />
+      {() => (
+        <NavigationIndependentTree>
+          <AIAssistant />
+        </NavigationIndependentTree>
+      )}
       <Tabs.Screen
         name="feedback"
         options={{
@@ -47,6 +63,11 @@ export default function AppLayout() {
           ),
         }}
       />
+      {() => (
+        <NavigationIndependentTree>
+          <Feedback />
+        </NavigationIndependentTree>
+      )}
       <Tabs.Screen
         name="profile"
         options={{
